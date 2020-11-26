@@ -16,10 +16,6 @@ import id.co.telkom.iot.AntaresResponse;
 
 public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.OnResponseListener {
 
-    private final String TAG = "ANTARES-API";
-    private final String APIKEY = "004cbd64ff8a7fd4:53c77e7cf8c628fd";
-    private final String APPNAME = "MyMedication";
-    private final String DEVICENAME = "KotakObat";
     private Button btnRefresh;
     private Button btnOn;
     private Button btnOff;
@@ -27,20 +23,22 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
     private AntaresHTTPAPI antaresAPIHTTP;
     private String dataDevice;
 
+    private final String TAG = "ANTARES-API";
+    private final String APIKEY = "004cbd64ff8a7fd4:53c77e7cf8c628fd";
+    private final String APPNAME = "MyMedication";
+    private final String DEVICENAME = "KotakObat";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // --- Inisialisasi UI yang digunakan di aplikasi --- //
         btnRefresh = findViewById(R.id.btnRefresh);
         btnOff = findViewById(R.id.btnOff);
         btnOn = findViewById(R.id.btnOn);
 
         txtData = findViewById(R.id.txtData);
 
-        // --- Inisialisasi API Antares --- //
-        //antaresAPIHTTP = AntaresHTTPAPI.getInstance();
         antaresAPIHTTP = new AntaresHTTPAPI();
         antaresAPIHTTP.addListener(this);
 
@@ -70,8 +68,6 @@ public class MainActivity extends AppCompatActivity implements AntaresHTTPAPI.On
 
     @Override
     public void onResponse(AntaresResponse antaresResponse) {
-        // --- Cetak hasil yang didapat dari ANTARES ke System Log --- //
-        //Log.d(TAG,antaresResponse.toString());
         Log.d(TAG, Integer.toString(antaresResponse.getRequestCode()));
         if (antaresResponse.getRequestCode() == 0) {
             try {
